@@ -1,0 +1,6 @@
+
+- After bootstraping the app, launch the binary skeleton
+
+    $ cd <..>/gitloop
+    $ bundle exec rake install
+    $ ./bin/gitloop  --help
