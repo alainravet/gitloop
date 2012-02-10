@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables = ["gitloop"]
+  s.executables = ["git-loop", "gitloop"]
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
