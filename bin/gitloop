@@ -17,9 +17,26 @@ end
 
 description "combine `git merge --no--ff ..` and `git rebase ..` to regroup commits in a loop"
 
-opts.on("-m MESSAGE","--message", "custom merge message" ) do |message|
-  options[:message] = message
-end
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner =<<-DOC
+    Usage: git loop <from_ref> <to_ref> -m "<message>"
+      where <*_ref> is either
+         - a commit reference (SHA, branch name, etc..)
+         - a commit message part
+
+      example:
+        git loop 7355c79 6fddd9c          -m "hellboy was here"
+        git loop master~4 master~2        -m "hellboy was here"
+        git loop "c2"  "c4"               -m "hellboy was here"
+        git loop "install: foobar" "optimize: foobar"  -m "foobarize the application"
+  DOC
+
+  opts.on("-m", "--message", "commit message for the loop") do |m|
+    options[:message] = m
+  end
+end.parse!
 
 arg :message
 
