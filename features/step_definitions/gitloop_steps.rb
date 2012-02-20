@@ -3,7 +3,6 @@
 # -----------
 
 
-
 # -----------
 # Tests :
 # -----------
@@ -28,7 +27,10 @@ end
 #     """
 
 Then 'the git log graph is:' do |expected_output|
-  the_git_log_graph.should == expected_output
+  record_time_taken("git-log-graph-IS") do
+    the_git_log_graph.should == expected_output
+  end
+
 end
 
 
@@ -41,5 +43,7 @@ end
 #     """
 
 Then 'the git log graph matches:' do |raw_expected_output|
-  the_git_log_graph.should match(make_smart_regexp(raw_expected_output))
+  record_time_taken("git-log-graph-matches") do
+    the_git_log_graph.should match(make_smart_regexp(raw_expected_output))
+  end
 end

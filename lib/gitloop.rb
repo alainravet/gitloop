@@ -1,5 +1,9 @@
 require "gitloop/version"
 
 module Gitloop
-  # Your code goes here...
+
+  class GitError < Exception; end
+
 end
+
+require File.dirname(__FILE__) + "/gitloop/looper"
