@@ -13,18 +13,17 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "gitloop"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.files        = Dir.glob("{bin,lib,doc}/**/*") + %w(LICENSE README.markdown Gemfile Gemfile.lock)
+  s.test_files   = Dir.glob("{features}/**/*")
+
   s.executables = ["git-loop", "gitloop"]
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_dependency('methadone')
+
   s.add_development_dependency('rdoc')
   s.add_development_dependency('aruba')
   s.add_development_dependency('rake','~> 0.9.2')
-  s.add_dependency('methadone')
-  s.add_dependency('guard-cucumber')
-  s.add_dependency('ruby_gntp')   # for Growl notifications
+  s.add_development_dependency('guard-cucumber')
+  s.add_development_dependency('ruby_gntp')   # for Growl notifications
 end
