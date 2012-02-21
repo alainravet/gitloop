@@ -1,7 +1,8 @@
 rm -rf sandbox
 unzip features/support/fixtures/sandbox.zip
 cd sandbox
+echo "-------------- BEFORE"
 git log --oneline --graph
+echo "--------------"
 ../bin/git-loop "c2" "c4" -m "let's do it"
 #/Users/ara/.rvm/gems/ruby-1.9.3-p125@gitloop/bin/gitloop "c2" "c4" -m "let's do it"
-git log --oneline --graph

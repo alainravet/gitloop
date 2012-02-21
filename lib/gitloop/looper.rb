@@ -11,6 +11,11 @@ module Gitloop
       validate_commits_refs_sequence! from_ref, to_ref
 
       build_the_loop(from_ref, message, to_ref)
+
+      loop_starts_at_very_first_commit = !valid_commits_reference?("#{from_ref}^^")
+      puts loop_starts_at_very_first_commit ?
+        call_git("log --oneline --graph --color --decorate") :
+        call_git("log --oneline --graph --color --decorate #{from_ref}^^..HEAD")
     end
 
   private
