@@ -31,10 +31,28 @@ Feature: Happy path (no problems, no edge case)
     And the current branch is "master"
 
     Scenarios: pure SHAs or pure messages snippets
-      |                           command                           |
+      |                           command                      |
       | git-loop 7355c79 6fddd9c   -m "hellboy was here"       |
       | git-loop master~4 master~2 -m "hellboy was here"       |
       | git-loop "c2"  "c4" -m "hellboy was here"              |
       | git-loop "second commit" 6fddd9c -m "hellboy was here" |
 
 
+#--------------------------------------------------------------------------------
+
+  Scenario: comment can contain quote
+    When I run `git-loop 7355c79 6fddd9c   -m "let's do it"`
+
+    Then the current branch is "master"
+     And the git log graph matches:
+       """
+       * <a_sha> c6
+       * <a_sha> c5 five - fifth commit
+       *   <a_sha> *** let's do it
+       |\
+       | * 6fddd9c c4 not the third commit
+       | * bab916a c3 the third commit
+       | * 7355c79 c2 the second commit
+       |/
+       * 91182df c1
+       """

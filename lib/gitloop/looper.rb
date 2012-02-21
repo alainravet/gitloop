@@ -21,7 +21,7 @@ module Gitloop
       call_git "co #{from_ref}^ --quiet"
 
       msg = message || "loop #{from_ref}..#{to_ref}"
-      call_git "merge --no-ff #{to_ref} -m '*** #{msg}'"
+      call_git "merge --no-ff #{to_ref} -m \"*** #{msg}\""
 
       merge_top = call_git "rev-parse HEAD"
       call_git "co  --quiet #{curr_branch}"

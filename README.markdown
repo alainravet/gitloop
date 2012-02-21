@@ -6,7 +6,7 @@
   <tr style="line-height:5em">
     <td colspan="3" style="text-align:center;">
         <code style="font-size:1.6em;padding:20px 40px;background:lightyellow">
-            git <b>loop</b>&nbsp;&nbsp;master~4&nbsp;&nbsp;master~2&nbsp;&nbsp;&nbsp;<b>-m</b> "let s group them"
+            git <b>loop</b>&nbsp;&nbsp;master~4&nbsp;&nbsp;master~2&nbsp;&nbsp;&nbsp;<b>-m</b> "let's group them"
         </code>
     </td>
   </tr>
