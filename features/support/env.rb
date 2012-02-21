@@ -16,4 +16,5 @@ end
 
 After do
   ENV['RUBYLIB'] = @original_rubylib
+  FileUtils.rm_rf File.join(File.dirname(__FILE__), '../../tmp/aruba')
 end
