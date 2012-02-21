@@ -20,16 +20,16 @@
 
 The same results would be obtained by any of :
 
-    $ git loop   7355c79 6ffd9       -m "a logical group"
-    $ git loop   second  c4          -m "a logical group"
-    $ git loop   c2      6ffd9       -m "a logical group"
+    $ git loop   7355c79    6ffd9        -m "let's group them"
+    $ git loop   second     c4           -m "let's group them"
+    $ git loop   "second commit" third   -m "let's group them"
 
 
 Installation :
 -------------
         $ gem install gitloop
 
-#### Report bugs to <https://github.com/alainravet/alainravet/>
+#### Report bugs to <https://github.com/alainravet/gitloop/issues>
 
 --------------------------------------------------------------------------------
 
