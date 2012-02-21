@@ -11,9 +11,9 @@
     </td>
   </tr>
   <tr>
-    <td width="42%" style="text-align:center"> <img src="./doc/BEFORE.png"/></td>
+    <td width="42%" style="text-align:center"> <img src="https://github.com/alainravet/gitloop/raw/master/doc/BEFORE.png"/></td>
     <td width="6%" style="text-align:center;font-size:4em;">&rarr;</td>
-    <td width="42%" style="text-align:center"> <img src="./doc/AFTER.png" /></td>
+    <td width="42%" style="text-align:center"> <img src="https://github.com/alainravet/gitloop/raw/master/doc/AFTER.png" /></td>
   </tr>
 </table>
 
