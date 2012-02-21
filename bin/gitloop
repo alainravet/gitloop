@@ -7,38 +7,51 @@ require File.dirname(__FILE__) + '/../lib/gitloop'
 include Methadone::Main
 
 main do |from_ref, to_ref|
-  begin
-    Gitloop::Looper.make_loop_for_references_or_messages(from_ref, to_ref, options[:message])
-  rescue Gitloop::GitError => e
-    puts "*** ERROR : #{e}"
+  all_parameters_provided = from_ref && to_ref && options[:message]
+  if all_parameters_provided
+    begin
+      Gitloop::Looper.make_loop_for_references_or_messages(from_ref, to_ref, options[:message])
+    rescue Gitloop::GitError => e
+      puts "*** ERROR : #{e}"
+    end
+  else
+    puts @banner
   end
 end
 
+on("-m MESSAGE", "--message", "commit message for the loop") do |m|
+  options[:message] = m
+end
 
-description "combine `git merge --no--ff ..` and `git rebase ..` to regroup commits in a loop"
+@banner = <<-DOC
+  Usage: git loop <from_ref> <to_ref> -m "<message>"
+    where <*_ref> is either
+       - a commit reference (SHA, branch name, etc..) or
+       - a commit message part
 
 
-options = {}
-OptionParser.new do |opts|
-  opts.banner =<<-DOC
-    Usage: git loop <from_ref> <to_ref> -m "<message>"
-      where <*_ref> is either
-         - a commit reference (SHA, branch name, etc..)
-         - a commit message part
+    example:
 
-      example:
-        git loop 7355c79 6fddd9c          -m "hellboy was here"
-        git loop master~4 master~2        -m "hellboy was here"
-        git loop "c2"  "c4"               -m "hellboy was here"
-        git loop "install: foobar" "optimize: foobar"  -m "foobarize the application"
-  DOC
+          +-----------------------------------------------------------------+
+          |     $ git loop   "c2"     "the third"   -m "a logical group"    |
+          | or  $ git loop   7355c79  bab916a       -m "a logical group"    |
+          +-----------------------------------------------------------------+
+              BEFORE                                        AFTER
+          -------------------------------------------------------------------
+                                                    * 69fd256 c6
+                                                    * 377c650 c5 five - fifth commit
+                                                    * 9f31be9 c4 not the third commit
+    * edadbb7 c6                     ---------->    *   845c17e *** a logical group
+    * da55377 c5 five - fifth commit                |\\
+    * 6fddd9c c4 not the third commit            [  | * bab916a c3 the third commit    ]
+ [  * bab916a c3 the third commit       ]        [  | * 7355c79 c2 the second commit   ]
+ [  * 7355c79 c2 the second commit      ]           |/
+    * 91182df c1                                    * 91182df c1
 
-  opts.on("-m", "--message", "commit message for the loop") do |m|
-    options[:message] = m
-  end
-end.parse!
-
-arg :message
+DOC
+description "  combine `git merge --no--ff ..` and `git rebase ..` to regroup commits sequences in \"loops\"" +
+            "\n\n" +
+            @banner
 
 
 version Gitloop::VERSION
